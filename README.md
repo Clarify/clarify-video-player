@@ -1,7 +1,7 @@
-Op3nvoice Video Player
+OP3Nvoice Video Player
 ======================
 
-This is a proof of concept video player that integrates with the Op3nvoice search library.
+This is a proof of concept video player that integrates with the OP3Nvoice search library.
 
 This uses the PHP library available here: https://github.com/Op3nvoice/op3nvoice-php
 
