@@ -1,3 +1,22 @@
+<?php
+
+include 'vendor/autoload.php';
+
+$terms = $_GET['terms'];
+$terms = preg_replace("/[^A-Za-z0-9|]/", "", $terms);
+
+$audio = new Op3nvoice\Bundle($apikey);
+$items = $audio->search($terms);
+
+$search_terms = json_encode($items['search_terms']);
+$item_results = json_encode($items['item_results']);
+
+$videokey = $items['_links']['items'][0]['href'];
+$tracks = $audio->tracks($videokey)['tracks'];
+$mediaUrl = $tracks[0]['media_url'];
+//todo: get the duration from the tracks record, currently coming back as zero
+
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
@@ -16,48 +35,12 @@
     <link rel="stylesheet" href="css/o3v-player.css"/>
 
     <script type="text/javascript">
-      
-      /*
-       * OP3Nvoice video player 
-       *
-       * Copyright (c) 2013 OP3Nvoice Ltd. All rights reserved.
-       *
-       * The MIT License (MIT)
-       *
-       * Permission is hereby granted, free of charge, to any person obtaining a copy
-       * of this software and associated documentation files (the "Software"), to deal
-       * in the Software without restriction, including without limitation the rights
-       * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-       * copies of the Software, and to permit persons to whom the Software is
-       * furnished to do so, subject to the following conditions:
-       * 
-       * The above copyright notice and this permission notice shall be included in all
-       * copies or substantial portions of the Software.
-       * 
-       * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-       * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-       * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-       * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-       * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-       * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-       * SOFTWARE.
-       * 
-       * Makes use of:
-       *  jquery - GPL/MIT license
-       *  jquery-ui - GPL/MIT license
-       *  jplayer - GPL/MIT license
-       *
-       */
-      
       $(document).ready(function() {
       
          // Set the path to the jplayer swf file.
          o3vPlayer.jPlayerOptions.swfPath = 'scripts/jquery';
       
          // Set to the playback URL for the video file(s).
-      //   var mediaURLs = {m4v: 'SET_URL_TO_VIEW_FOR_createPlayer_CALL',
-                            poster 'SET_URL_FOR_POSTER_IMAGE' };
-      
          var mediaURLs = { m4v:"http://www.jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v",
                            poster:"http://www.jplayer.org/video/poster/Big_Buck_Bunny_Trailer_480x270.png"};
       
@@ -69,13 +52,11 @@
          ////////////////////////////////////////////////////////
       
          // This is a sample search_terms array from a SearchCollection
-
-         var searchTerms = [{"term":"pizza"},{"term":"beer"},{"term":"party"}];
+         var searchTerms = <?php echo $search_terms; ?>;
 
          // This is a sample "ItemResult" object from a SearchCollection JSON
          // object. It is one item in the item_results array.
-      
-         var itemResult = {"score":0.054899603,"term_results":[{"score":1,"matches":[{"type":"text","field":"description","hits":[{"start":10,"end":14}]},{"type":"audio","track":0,"hits":[{"start":12.12,"end":12.23}]}]},{"score":1,"matches":[{"type":"audio","track":0,"hits":[{"start":4.56,"end":4.66}]}]},{"score":1,"matches":[{"type":"audio","track":0,"hits":[{"start":6.18,"end":6.54}]}]}]};
+          var itemResult =  <?php echo substr($item_results, 1, -1); ?>;
 
          ////////////////////////////////////////////////////////  
 
@@ -91,14 +72,14 @@
          // Create words tags for SearchCollection.
       
          for (var i=0,c=searchTerms.length;i<c;i++) {
-	    var term = searchTerms[i].term;
-   	    var dtag = document.createElement('div');
-	    $(dtag).addClass("o3v-search-tag o3v-search-color-"+i);
-	    $(dtag).text(term);
+            var term = searchTerms[i].term;
+            var dtag = document.createElement('div');
+            $(dtag).addClass("o3v-search-tag o3v-search-color-"+i);
+            $(dtag).text(term);
             $("#player_2_search_tags").append(dtag);
          }      
-	 dtag = document.createElement('div');
-	 $(dtag).addClass("o3v-clear");
+         dtag = document.createElement('div');
+         $(dtag).addClass("o3v-clear");
          $("#player_2_search_tags").append(dtag);
          ////////////////////////////////////////////////////////  
 							    
