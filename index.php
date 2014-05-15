@@ -88,29 +88,18 @@ $duration = $tracks[0]['duration'];
     </script>
     
   </head>
-  <body>
-    <h3>OP3Nvoice JPlayer Demo</h3>
-    
-    <br>
-    Player 1
-    <br>
-    <br>
-      
-    <div id="player_instance_1"></div>
-    
-    <br>
-    Player 2
-    <br>
-    <br>
-      <div id="player_2_search_tags" class="o3v-search-tag-box"></div>
-    <div id="player_instance_2"></div>
-    
-    <br>
-    Player 3
-    <br>
-    <br>
-
-    <div id="player_instance_3"></div>
-
-  </body>
+    <body>
+        <h3>OP3Nvoice JPlayer Video Demo</h3>
+        <form action="" method="GET">
+          Search terms: <input name="terms" value="" />
+          <input type="submit" />
+        </form>
+        <br>
+        Player Example:
+        <br>
+        <em>If no video player appears, there was not a search result found.</em>
+        <br>
+        <div id="player_1_search_tags" class="o3v-search-tag-box"></div>
+        <div id="player_instance_1"></div>
+    </body>
 </html>
