@@ -1,9 +1,9 @@
-OP3Nvoice Video Player
+Clarify Video Player
 ======================
 
-This is a proof of concept video player that integrates with the OP3Nvoice search library.
+This is a proof of concept video player that integrates with the Clarify API search library.
 
-This uses the PHP library available here: https://github.com/Op3nvoice/op3nvoice-php
+This uses the PHP library available here: https://github.com/Clarify/clarify-php
 
 To use this:
 
