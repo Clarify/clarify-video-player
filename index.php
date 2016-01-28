@@ -58,31 +58,32 @@ $bundles = $items['_links']['items'];
               $duration = $tracks[0]['duration'];
               ?>
 
-          // Set to the playback URL for the audio file(s).
-          var mediaURLs = { m4v:"<?php echo $mediaUrl; ?>" };
-          // This is a sample "ItemResult" object from a SearchCollection JSON
-          // object. It is one item in the item_results array.
-          var itemResult<?php echo $key; ?> =  <?php echo json_encode($item_results[$key]); ?>;
-          ////////////////////////////////////////////////////////
+              // Set to the playback URL for the video file(s).
+              var mediaURLs<?php echo $key; ?> = { m4v:'<?php echo $mediaUrl; ?>' };
+              // This is a sample "ItemResult" object from a SearchCollection JSON
+              // object. It is one item in the item_results array.
+              var itemResult<?php echo $key; ?> =  <?php echo json_encode($item_results[$key]); ?>;
+              ////////////////////////////////////////////////////////
 
-          // Create a player and add in search results marks
-          var player = o3vPlayer.createPlayer("#player_instance_<?php echo $key; ?>", mediaURLs<?php echo $key; ?>, <?php echo $duration; ?>, {volume:0.5});
-          o3vPlayer.addItemResultMarkers(player, <?php echo $duration; ?>,itemResult<?php echo $key; ?>, searchTerms);
+              // Create a player and add in search results marks
+              var player = o3vPlayer.createPlayer("#player_instance_<?php echo $key; ?>", mediaURLs<?php echo $key; ?>, <?php echo $duration; ?>, {volume:0.5});
+              o3vPlayer.addItemResultMarkers(player, <?php echo $duration; ?>,itemResult<?php echo $key; ?>, searchTerms);
 
-          ////////////////////////////////////////////////////////
-          // Create words tags for SearchCollection.
+              ////////////////////////////////////////////////////////
+              // Create words tags for SearchCollection.
 
-          for (var i=0,c=searchTerms.length;i<c;i++) {
-              var term = searchTerms[i].term;
-              var dtag = document.createElement('div');
-              $(dtag).addClass("o3v-search-tag o3v-search-color-"+i);
-              $(dtag).text(term);
+              for (var i=0,c=searchTerms.length;i<c;i++) {
+                  var term = searchTerms[i].term;
+                  var dtag = document.createElement('div');
+                  $(dtag).addClass("o3v-search-tag o3v-search-color-"+i);
+                  $(dtag).text(term);
+                  $("#player_<?php echo $key; ?>_search_tags").append(dtag);
+              }
+              dtag = document.createElement('div');
+              $(dtag).addClass("o3v-clear");
               $("#player_<?php echo $key; ?>_search_tags").append(dtag);
-          }
-          dtag = document.createElement('div');
-          $(dtag).addClass("o3v-clear");
-          $("#player_<?php echo $key; ?>_search_tags").append(dtag);
-          ////////////////////////////////////////////////////////
+              ////////////////////////////////////////////////////////
+          <?php } ?>
     });
     </script>
     
@@ -90,7 +91,7 @@ $bundles = $items['_links']['items'];
     <body>
         <h3>Clarify JPlayer Video Demo</h3>
         <form action="" method="GET">
-            Search terms: <input name="terms" value="" />
+            Search terms: <input name="terms" value="<?php print $terms; ?>" />
             <input type="submit" />
         </form>
         <br>
