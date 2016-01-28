@@ -1,16 +1,17 @@
 Clarify Video Player
 ======================
 
-This is a proof of concept video player that integrates with the Clarify API search library.
-
-This uses the PHP library available here: https://github.com/Clarify/clarify-php
+This is a basic search page that uses the Clarify PHP library, available here: https://github.com/Clarify/clarify-php
 
 To use this:
 
-TODO
+*  Download this package from Github;
+*  Rename credentials-dist.php to credentials.php and add your API key;
+*  Run `` composer install `` to get the required PHP library;
+*  Load this folder in your favorite browser, the URL will be something like: http://localhost/clarify-video-player/
+*  Fill in your search terms and hit submit;
+*  If you need videos, load what you need from here: http://media.clarify.io/
 
-This can be improved in a number of ways:
+Note: If there are no search results, the player does not display. We should improve that.
 
-*  this only shows the first resulting file, we could extend it to show all of them;
-*  the duration should be included in the API call so we don't have to hardcode it here (line 57);
-*  if there are no search results, we could display a more useful/friendly message.
+More quickstarts are available here: http://docs.clarify.io/quickstarts/
