@@ -1,7 +1,18 @@
 Clarify Video Player
 ======================
 
-This is a basic search page that uses the Clarify PHP library, available here: https://github.com/Clarify/clarify-php
+This is a video player extension for the jplayer.org video player. It provides any easy way to show Clarify search results in the scrubber of the player so you can jump right to the relevant words.
+
+![Sample Player](/docs/sample_player.png?raw=true "Sample Player")
+
+
+If you're using the videojs player, we also have a plugin for that here: https://github.com/Clarify/videojs-clarify-annotations
+
+
+Demo Page
+---------
+
+This demo includes a basic search page with the video player. It uses the Clarify PHP library, available here: https://github.com/Clarify/clarify-php
 
 To use this:
 
