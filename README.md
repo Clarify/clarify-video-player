@@ -6,6 +6,9 @@ This is a video player extension for the jplayer.org video player. It provides a
 ![Sample Player](/docs/sample_player.png?raw=true "Sample Player")
 
 
+If you're using the videojs player, we also have a plugin for that here: https://github.com/Clarify/videojs-clarify-annotations
+
+
 Demo Page
 ---------
 
